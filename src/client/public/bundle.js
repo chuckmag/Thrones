@@ -22091,7 +22091,7 @@
 	          _react2.default.createElement(
 	            'button',
 	            { onClick: this.onLike },
-	            'Like Me'
+	            'Like Me!?'
 	          )
 	        )
 	      );

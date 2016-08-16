@@ -1,4 +1,19 @@
-'use strict';
+var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
+var config = require('./webpack.config');
+
+new WebpackDevServer(webpack(config), {
+	publicPath: config.output.publicPath,
+	hot: true,
+	historyApiFallback: true
+}).listen(1337, 'localhost', function (err, result) {
+	if (err) {
+		console.log(err);
+	}
+	console.log('Listening at localhost:1337');
+});
+
+/*'use strict';
 
 const Hapi = require('hapi');
 const SocketIO = require('socket.io');
@@ -78,4 +93,4 @@ server.start((err) => {
         throw err;
     }
     console.log('Server running at:', server.info.uri);
-});
+});*/
