@@ -2,6 +2,7 @@
 
 const Hapi = require('hapi');
 const SocketIO = require('socket.io');
+const serverManager = require('./src/server/ServerManager.js');
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -9,7 +10,7 @@ server.connection({
 	host: 'localhost',
 	port: 8000
 });
-/*
+
 var io = SocketIO.listen(server.listener);
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -22,13 +23,24 @@ io.on('connection', function(socket){
 	console.log('reversed string: ' + reversedString);
 	io.emit('reverse string', reversedString);
   });
-});*/
+});
 
-var serverManager = new function() {
-	this.servers = [];
-	console.log("Creating server manager with with blank server array.")
-}
+const getServerListHandler = function (request, reply) {
+	return reply(serverManager.servers);
+};
 
+const createServerHandler = function (request, reply) {
+	return reply(serverManager.createServer(request.data));
+};
+
+const joinServerHandler = function (request, reply) {
+
+};
+
+
+const getServerHandler = function (request, reply) {
+	return reply(serverManager.getServer(request.params));
+};
 
 // register a static html page to display at the root of the website.
 server.register(require('inert'), (err) => {
@@ -47,6 +59,22 @@ server.register(require('inert'), (err) => {
 		path: '/static/{fileName}',
 		handler: function (request, reply) {
 			reply.file('./src/client/public/' + request.params.fileName);}
+		},
+		{method: 'GET',
+		path: '/api/getServerList',
+		handler: getServerListHandler
+		},
+		{method: 'POST',
+		path: '/api/createServer',
+		handler: createServerHandler
+		},
+		{method: 'POST',
+		path: '/api/joinServer',
+		handler: joinServerHandler
+		},
+		{method: 'GET',
+		path: '/api/getServer/{id}',
+		handler: getServerHandler
 		}
 	]);
 });

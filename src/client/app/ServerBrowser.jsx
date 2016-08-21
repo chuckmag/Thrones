@@ -1,8 +1,11 @@
 import React from 'react';
-
+import $ from "jquery";
 
 var ServerList = React.createClass({
 	render: function() {
+		if (this.props.servers.length === 0) {
+			return <span>There are no servers! Want to Create one?</span>
+		}
     	var createServer = function(server) {
       		return <li key={server.id}>Server Name : {server.serverName} | Player Count : {server.playerCount}/6 | Game Type : {server.gameType}</li>;
     	};
@@ -15,7 +18,8 @@ class ServerBrowser extends React.Component {
   	constructor(props) {
     	super(props);
     	this.state = {
-    		servers : [{id: Date.now(), serverName: 'First Server', playerCount: 0, gameType: 'Default'}],
+    		//servers : [{id: Date.now(), serverName: 'First Server', playerCount: 0, gameType: 'Default'}],
+    		servers: [],
     		serverNameSearch : '',
     		serverNameCreate : ''
     	};
@@ -24,6 +28,20 @@ class ServerBrowser extends React.Component {
     	this.serverNameSearchChange = this.serverNameSearchChange.bind(this);
     	this.serverNameCreateChange = this.serverNameCreateChange.bind(this);
     	this.preventDuplicateServer = this.preventDuplicateServer.bind(this);
+  	}
+
+  	componentDidMount () {
+  		$.ajax({
+  			url:'./api/getServerList',
+  			dataType: 'json',
+  			cache: false,
+  			success: function (data) {
+  				this.setState({servers: data});
+  			}.bind(this),
+  			error: function(xhr, status, err) {
+        		console.error('./api/getServerList', status, err.toString());
+      		}.bind(this)
+  		});
   	}
 
   	searchServers (e) {
