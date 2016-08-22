@@ -1,17 +1,8 @@
 import React from 'react';
-import $ from "jquery";
+import VisibleServerList from '../containers/VisibleServerList.jsx';
+//import $ from "jquery";
 
-var ServerList = React.createClass({
-	render: function() {
-		if (this.props.servers.length === 0) {
-			return <span>There are no servers! Want to Create one?</span>
-		}
-    	var createServer = function(server) {
-      		return <li key={server.id}>Server Name : {server.serverName} | Player Count : {server.playerCount}/6 | Game Type : {server.gameType}</li>;
-    	};
-    	return <ul>{this.props.servers.map(createServer)}</ul>;
-  	}
-});
+
 
 class ServerBrowser extends React.Component {
 
@@ -30,7 +21,7 @@ class ServerBrowser extends React.Component {
     	this.preventDuplicateServer = this.preventDuplicateServer.bind(this);
   	}
 
-  	componentDidMount () {
+  	/*componentDidMount () {
   		$.ajax({
   			url:'./api/getServerList',
   			dataType: 'json',
@@ -42,7 +33,7 @@ class ServerBrowser extends React.Component {
         		console.error('./api/getServerList', status, err.toString());
       		}.bind(this)
   		});
-  	}
+  	}*/
 
   	searchServers (e) {
   		e.preventDefault();
@@ -93,7 +84,7 @@ class ServerBrowser extends React.Component {
         			<button>Search Servers</button>
     				</span>
       			</form>
-      			<ServerList servers={this.state.servers} />
+      			<VisibleServerList />
       			<form onSubmit={this.createServer}>
       				<span>Server Name : <input onChange={this.serverNameCreateChange} value={this.state.serverNameCreate} /> 
         			<button>Create Server</button>
