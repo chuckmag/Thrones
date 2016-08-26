@@ -16,13 +16,13 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-let App = ({server}) => {
+let App = ({server, params}) => {
 
 	if (server.id) {
 		return <Game />
 	}
 
-	return <ServerBrowser />
+	return <ServerBrowser serverNameFilter={params.serverNameFilter}/>
 }
 App = connect(mapStateToProps, mapDispatchToProps)(App);
 

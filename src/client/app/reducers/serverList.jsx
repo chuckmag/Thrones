@@ -62,3 +62,17 @@ const serverList = (state = [], action) => {
 }
 
 export default serverList;
+
+
+export const getVisibleServerList = (state, filter) => {
+	/*switch(filter) {
+		default:
+			return serverList;
+	}*/
+
+	if (filter.serverName) {
+		return state.filter(s => s.name.toLowerCase().indexOf(filter.serverName.toLowerCase()) !== -1);
+	}
+
+	return state;
+};

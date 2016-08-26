@@ -84,7 +84,7 @@ class ServerBrowser extends React.Component {
         			<button>Search Servers</button>
     				</span>
       			</form>
-      			<VisibleServerList />
+      			<VisibleServerList serverNameFilter={this.props.serverNameFilter} />
       			<form onSubmit={this.createServer}>
       				<span>Server Name : <input onChange={this.serverNameCreateChange} value={this.state.serverNameCreate} /> 
         			<button>Create Server</button>

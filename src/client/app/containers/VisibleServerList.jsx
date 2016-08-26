@@ -1,31 +1,18 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { joinServer } from '../actions/index.jsx';
 import ServerList from '../components/ServerList.jsx';
+import { getVisibleServerList } from '../reducers/index.jsx';
 
-const getVisibleServers = (serverList, filter) => {
-	switch(filter) {
-		default:
-			return serverList;
-	}
-};
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
 	return {
-		serverList: getVisibleServers(state.serverList, {})
-	}
-};
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		onJoinServerClick: (server) => 
-			dispatch(joinServer(server))
-		
+		serverList: getVisibleServerList(state, { serverName : ownProps.serverNameFilter })
 	}
 };
 
 const VisibleServerList = connect(
 	mapStateToProps,
-	mapDispatchToProps
+	{ onJoinServerClick: joinServer }
 )(ServerList);
 
 export default VisibleServerList;
