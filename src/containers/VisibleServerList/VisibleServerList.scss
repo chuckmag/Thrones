@@ -1,0 +1,35 @@
+.visibleServerList {
+  .refreshBtn {
+    margin-left: 20px;
+  }
+  .nameCol {
+    width: 5%;
+  }
+  .playerCountCol {
+    width: 20%;
+  }
+  .gameTypeCol {
+    width: 20%;
+    text-align: right;
+    input {
+      text-align: right;
+    }
+  }
+  .ownerCol {
+    width: 30%;
+  }
+  .buttonCol {
+    width: 25%;
+    :global(.btn) {
+      margin: 0 5px;
+    }
+  }
+  tr.saving {
+    opacity: 0.8;
+    :global(.btn) {
+      &[disabled] {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export loadServerList from './load';

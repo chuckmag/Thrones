@@ -15,3 +15,16 @@ export default function reducer(state = initialState, action = {}) {
       return state;
   }
 }
+
+export const joinServer = (server) => {
+  return {
+    type: JOIN_SERVER,
+    server: server
+  };
+};
+
+export const leaveServer = () => {
+  return {
+    type: LEAVE_SERVER
+  };
+};
