@@ -1,3 +1,4 @@
+
 const DEFAULT_SERVERLIST = [
   { id: '0', name: 'TestServer1', playerCount: 3, gameType: 'Default' },
   { id: '1', name: 'TestServer2', playerCount: 3, gameType: 'Default' },
