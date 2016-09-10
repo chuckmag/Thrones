@@ -57,12 +57,11 @@ export default class ServerBrowser extends Component {
       refreshClassName += ' fa-spin';
     }
     const styles = require('./ServerBrowser.scss');
-
     return (
-      <div className="container">
+      <div className={styles.widgets + ' container'}>
         <Helmet title="Server Browser"/>
         <h1>
-          Thrones Games
+          Thrones Games {' '}
           <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
             <i className={refreshClassName}/> {' '} Reload Game List
           </button>
@@ -71,8 +70,8 @@ export default class ServerBrowser extends Component {
           <div>
             <form className="form-inline" onSubmit={this.handleSubmit}>
               <div className="form-group">
-                <input type="text" ref="serverName" placeholder="Enter a server and click search to filter the ServerList" className="form-control"/>
-              </div>
+                <input type="text" ref="serverName" placeholder="Search by Name" className="form-control"/>
+              </div> {' '}
               <button className="btn btn-success" onClick={handleSubmit}><i className="fa fa-sign-in"/>{' '}Search
               </button>
             </form>
