@@ -9,7 +9,7 @@ export default class server extends Component {
   };
 
   render() {
-    const {name, playerCount, gameType, onJoinServerClick} = this.props;
+    const {name, playerCount, gameType} = this.props;
     const styles = require('./Server.scss');
 
     return (
@@ -18,7 +18,7 @@ export default class server extends Component {
         <td className={styles.colorCol}>{playerCount}/6</td>
         <td className={styles.sprocketsCol}>{gameType}</td>
         <td className={styles.buttonCol}>
-          <button className="btn btn-primary" onClick={onJoinServerClick}>Join Server</button>
+          <button className="btn btn-primary" onClick={this.props.onJoinServerClick}>Join Server</button>
         </td>
       </tr>
     );

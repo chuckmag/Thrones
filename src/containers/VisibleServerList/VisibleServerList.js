@@ -18,8 +18,7 @@ import { isLoaded as isServerListLoaded, load as loadServerList } from 'redux/mo
   state => ({
     serverList: state.serverList.data,
     error: state.serverList.error
-  }), joinServer
-  )
+  }), { joinServer })
 export default class VisibleServerList extends Component {
   static propTypes = {
     serverList: PropTypes.arrayOf(PropTypes.shape({
@@ -29,7 +28,7 @@ export default class VisibleServerList extends Component {
       gameType: PropTypes.string.isRequired
     }).isRequired).isRequired,
     error: PropTypes.string,
-    joinServer: PropTypes.func
+    joinServer: PropTypes.func.isRequired
   };
 
   render() {
