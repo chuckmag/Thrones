@@ -2,14 +2,28 @@ import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { VisibleServerList } from 'containers';
-import { setServerNameFilter } from 'redux/modules/serverList';
+import { asyncConnect } from 'redux-async-connect';
+import { isLoaded as isServerListLoaded, load as loadServerList} from 'redux/modules/serverList';
+import * as serverListActions from 'redux/modules/serverList';
 
+@asyncConnect([{
+  deferred: true,
+  promise: ({store: {dispatch, getState}}) => {
+    if (!isServerListLoaded(getState())) {
+      return dispatch(loadServerList());
+    }
+  }
+}])
 @connect(
-  () => ({}),
-  { setServerNameFilter })
+  state => ({
+    loading: state.serverList.loading
+  }),
+  { ...serverListActions })
 export default class ServerBrowser extends Component {
 
   static propTypes = {
+    loading: PropTypes.bool,
+    load: PropTypes.func,
     setServerNameFilter: PropTypes.func.isRequired
   };
 
@@ -28,23 +42,38 @@ export default class ServerBrowser extends Component {
   //   return duplicateServer;
   // }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const input = this.refs.serverName;
-    this.props.setServerNameFilter(input.value);
-  }
 
   render() {
+    const {loading, load} = this.props;
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const input = this.refs.serverName;
+      this.props.setServerNameFilter(input.value);
+    };
+
+    let refreshClassName = 'fa fa-refresh';
+    if (loading) {
+      refreshClassName += ' fa-spin';
+    }
+    const styles = require('./ServerBrowser.scss');
+
     return (
       <div className="container">
         <Helmet title="Server Browser"/>
+        <h1>
+          Thrones Games
+          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
+            <i className={refreshClassName}/> {' '} Reload Game List
+          </button>
+        </h1>
         <div>
           <div>
             <form className="form-inline" onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <input type="text" ref="serverName" placeholder="Enter a server and click search to filter the ServerList" className="form-control"/>
               </div>
-              <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Search
+              <button className="btn btn-success" onClick={handleSubmit}><i className="fa fa-sign-in"/>{' '}Search
               </button>
             </form>
           </div>

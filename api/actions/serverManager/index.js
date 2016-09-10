@@ -1,1 +1,1 @@
-export loadServerList from './load';
+export load from './load';

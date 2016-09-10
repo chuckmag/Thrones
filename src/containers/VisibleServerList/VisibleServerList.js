@@ -1,22 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { Server } from 'components';
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-async-connect';
+import { getVisibleServerList } from 'redux/modules/serverList';
 import { joinServer } from 'redux/modules/server';
-import { isLoaded as isServerListLoaded, load as loadServerList } from 'redux/modules/serverList';
 
-@asyncConnect([{
-  deferred: true,
-  promise: ({store: {dispatch, getState}}) => {
-    if (!isServerListLoaded(getState())) {
-      return dispatch(loadServerList());
-    }
-  }
-}])
 @connect(
-  // state => ({serverList: getVisibleServerList(state.serverList.data, { serverName: state.serverList.serverNameFilter })})
   state => ({
-    serverList: state.serverList.data,
+    serverList: getVisibleServerList(state.serverList.data, { serverName: state.serverList.serverNameFilter }),
     error: state.serverList.error
   }), { joinServer })
 export default class VisibleServerList extends Component {
@@ -44,7 +34,7 @@ export default class VisibleServerList extends Component {
             {error}
           </div>
         }
-        {serverList && serverList.length &&
+        {!error && serverList && serverList.length > 0 &&
         <table className="table table-striped">
           <thead>
             <tr>

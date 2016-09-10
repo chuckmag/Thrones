@@ -1,0 +1,13 @@
+.serverBrowser {
+  .refreshBtn {
+    margin-left: 20px;
+  }
+  tr.saving {
+    opacity: 0.8;
+    :global(.btn) {
+      &[disabled] {
+        opacity: 1;
+      }
+    }
+  }
+}

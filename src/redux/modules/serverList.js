@@ -3,17 +3,17 @@ const LOAD_SUCCESS = 'thrones/serverList/LOAD_SUCCESS';
 const LOAD_FAIL = 'thrones/serverList/LOAD_FAIL';
 const SET_SERVERNAME_FILTER = 'thrones/serverList/SET_SERVERNAME_FILTER';
 
-const DEFAULT_SERVERLIST = [
-  { id: '0', name: 'TestServer1', playerCount: 3, gameType: 'Default' },
-  { id: '1', name: 'TestServer2', playerCount: 3, gameType: 'Default' },
-  { id: '2', name: 'TestServer3', playerCount: 3, gameType: 'Default' },
-  { id: '3', name: 'TestServer4', playerCount: 3, gameType: 'Default' }
-];
+// const DEFAULT_SERVERLIST = [
+//   { id: '0', name: 'TestServer1', playerCount: 3, gameType: 'Default' },
+//   { id: '1', name: 'TestServer2', playerCount: 3, gameType: 'Default' },
+//   { id: '2', name: 'TestServer3', playerCount: 3, gameType: 'Default' },
+//   { id: '3', name: 'TestServer4', playerCount: 3, gameType: 'Default' }
+// ];
 
 const initialState = {
   loaded: false,
   serverNameFilter: '',
-  data: DEFAULT_SERVERLIST
+  data: []
 };
 
 export default function serverList(state = initialState, action = {}) {
@@ -57,7 +57,7 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/serverList/load')
+    promise: (client) => client.get('/serverManager/load')
   };
 }
 
