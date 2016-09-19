@@ -45,7 +45,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "PORT": 80,
+        "PORT": 8080,
         "APIPORT": 3030
       }
     },
@@ -141,7 +141,6 @@
     "superagent": "^1.4.0",
     "url-loader": "^0.5.7",
     "warning": "^2.1.0",
-    "webpack": "^1.12.9",
     "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
@@ -186,6 +185,7 @@
     "sinon": "^1.17.2",
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
+    "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0",
     "timekeeper": "0.0.5"
