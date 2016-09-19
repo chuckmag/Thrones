@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Tabs, Tab } from 'react-tab-view';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { VisibleServerList } from 'containers';
@@ -58,7 +59,7 @@ export default class ServerBrowser extends Component {
     }
     const styles = require('./ServerBrowser.scss');
     return (
-      <div className={styles.widgets + ' container'}>
+      <div className={styles.serverBrowser + ' container'}>
         <Helmet title="Server Browser"/>
         <h1>
           Thrones Games {' '}
@@ -67,16 +68,33 @@ export default class ServerBrowser extends Component {
           </button>
         </h1>
         <div>
-          <div>
-            <form className="form-inline" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <input type="text" ref="serverName" placeholder="Search by Name" className="form-control"/>
-              </div> {' '}
-              <button className="btn btn-success" onClick={handleSubmit}><i className="fa fa-sign-in"/>{' '}Search
-              </button>
-            </form>
-          </div>
-          <VisibleServerList />
+          <Tabs headers={['Game List', 'Create Game']} classPrefix={styles.tabs + ' ' + styles.tabsStyleLine }>
+            <Tab>
+              <div className={styles.contentWrap}>
+                <section>
+                  <div>
+                    <form className="form-inline" onSubmit={this.handleSubmit}>
+                      <div className="form-group">
+                        <input type="text" ref="serverName" placeholder="Search by Name" className="form-control"/>
+                      </div> {' '}
+                      <button className="btn btn-success" onClick={handleSubmit}><i className="fa fa-sign-in"/>{' '}Search
+                      </button>
+                    </form>
+                  </div>
+                  <VisibleServerList />
+                </section>
+              </div>
+            </Tab>
+            <Tab>
+              <div className={styles.contentWrap}>
+                <section>
+                  <h1>
+                    Create a Game?
+                  </h1>
+                </section>
+              </div>
+            </Tab>
+          </Tabs>
         </div>
       </div>
     );
