@@ -63,9 +63,6 @@ export default class ServerBrowser extends Component {
         <Helmet title="Server Browser"/>
         <h1>
           Thrones Games {' '}
-          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
-            <i className={refreshClassName}/> {' '} Reload Game List
-          </button>
         </h1>
         <div>
           <Tabs headers={['Game List', 'Create Game']} classPrefix={styles.tabs + ' ' + styles.tabsStyleLine }>
@@ -80,6 +77,9 @@ export default class ServerBrowser extends Component {
                       <button className="btn btn-success" onClick={handleSubmit}><i className="fa fa-sign-in"/>{' '}Search
                       </button>
                     </form>
+                    <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}>
+                      <i className={refreshClassName}/> {' '} Reload Game List
+                    </button>
                   </div>
                   <VisibleServerList />
                 </section>
