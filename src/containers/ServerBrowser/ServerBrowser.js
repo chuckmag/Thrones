@@ -61,16 +61,13 @@ export default class ServerBrowser extends Component {
     return (
       <div className={styles.serverBrowser + ' container'}>
         <Helmet title="Server Browser"/>
-        <h1>
-          Thrones Games {' '}
-        </h1>
         <div>
           <Tabs headers={['Game List', 'Create Game']} classPrefix={styles.tabs + ' ' + styles.tabsStyleLine }>
             <Tab>
               <div className={styles.contentWrap}>
                 <section>
                   <div>
-                    <form className="form-inline" onSubmit={this.handleSubmit}>
+                    <form className="form-inline" >
                       <div className="form-group">
                         <input type="text" ref="serverName" placeholder="Search by Name" className="form-control"/>
                       </div> {' '}
